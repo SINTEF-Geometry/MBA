@@ -1,0 +1,103 @@
+#! /bin/bash
+
+# removing result file structure
+EXTRA_CATALOG=extras
+RESULT_CATALOG=mba-1.1
+rm -r $RESULT_CATALOG
+
+# reporting activity to user
+echo GPL distribution of MBA will be made in catalog $RESULT_CATALOG
+echo It will be zipped to $RESULT_CATALOG.tgz
+
+# making result file structure
+mkdir $RESULT_CATALOG
+mkdir $RESULT_CATALOG/include
+mkdir $RESULT_CATALOG/lib
+mkdir $RESULT_CATALOG/src
+mkdir $RESULT_CATALOG/app
+mkdir $RESULT_CATALOG/Data
+mkdir $RESULT_CATALOG/doc
+mkdir $RESULT_CATALOG/doc/images
+
+# copying root-level files
+cp $EXTRA_CATALOG/COPYING $RESULT_CATALOG
+cp $EXTRA_CATALOG/makefile_template $RESULT_CATALOG/Makefile
+cp $EXTRA_CATALOG/README $RESULT_CATALOG
+cp $EXTRA_CATALOG/local_settings $RESULT_CATALOG
+cp ../Data/rygg1.dat $RESULT_CATALOG/Data
+cp ../Doxyfile $RESULT_CATALOG
+cp ../doc/images/spockAndTerrain.jpg $RESULT_CATALOG/doc/images
+cp ../doc/images/SINTEFlogo.gif $RESULT_CATALOG/doc/images
+
+# copying header files
+HEADERFILES=`ls ../include/*.h`
+for n in $HEADERFILES
+do
+  FILENAME=`basename $n`
+  if test $FILENAME = doxymain.h
+  then
+    # do not modify this file
+    # first write license information
+    cat extras/license_header > $RESULT_CATALOG/include/$n
+    cat $n >> $RESULT_CATALOG/include/$n
+  else
+    if test `grep $FILENAME $EXTRA_CATALOG/omit_files`
+    then
+      # this file should be omitted from GPL distribution
+      echo Omitting $FILENAME
+    else
+      # first write license information
+      cat extras/license_header > $RESULT_CATALOG/include/$n
+      # remove all information before include guards and add result to 
+      # file
+      sed -n -e'/#ifndef/,$p' $n >> $RESULT_CATALOG/include/$n
+    fi
+  fi
+
+done
+
+#generating source files
+SOURCEFILES=`ls ../src/*.cpp`
+
+# make sure the 'removecomments' program is compiled
+g++ -O3 $EXTRA_CATALOG/removecomments.C -o $EXTRA_CATALOG/removecomments
+
+for n in $SOURCEFILES
+do
+  FILENAME=`basename $n`
+  if test `grep $FILENAME $EXTRA_CATALOG/omit_files`
+  then
+    # this file should be omitted from GPL distribution
+    echo Omitting $FILENAME
+  else 
+    cat extras/license_header > $RESULT_CATALOG/src/$n
+    # remove comments from this file
+    $EXTRA_CATALOG/removecomments < $n > xcmklp_temp
+    cat xcmklp_temp >> $RESULT_CATALOG/src/$n
+    rm xcmklp_temp;
+  fi
+
+done
+
+#generating app files
+APPFILES=`ls ../app/*.cpp ../app/*.C`
+
+for n in $APPFILES
+do
+  FILENAME=`basename $n`
+  if test `grep $FILENAME $EXTRA_CATALOG/omit_files`
+  then
+    # this file should be omitted from GPL distribution
+    echo Omitting $FILENAME
+  else 
+    cat extras/license_header > $RESULT_CATALOG/app/$n
+    # remove comments from this file
+    cat $n > xcmklp_temp
+    cat xcmklp_temp >> $RESULT_CATALOG/app/$n
+    rm xcmklp_temp;
+  fi
+
+done
+
+tar -zcvf $RESULT_CATALOG.tgz $RESULT_CATALOG > /dev/null
+echo DONE
