@@ -99,7 +99,7 @@ void MBAdata::buildBaseSurface() {
   }
 }
 
-void MBAdata::readScatteredData(char filename[]) {
+void MBAdata::readScatteredData(const char filename[]) {
 #ifdef MBA_DEBUG
   cout << "Reading data from file..." << endl;
 #endif
@@ -137,10 +137,14 @@ void MBAdata::readScatteredData(char filename[]) {
   ifile.seekg(0);
 	
   if (U_.get() == NULL)
-    U_.reset(new std::vector<double>);
+      U_.reset(new std::vector<double>);
   U_->resize(no);
+  if (V_.get() == NULL)
+      V_.reset(new std::vector<double>);
   V_->resize(no);
   Z_.resize(no);
+  if (Zorig_.get() == NULL)
+      Zorig_.reset(new std::vector<double>);
   Zorig_->resize(no);
 	
   for (int i = 0; i < no; i++) {

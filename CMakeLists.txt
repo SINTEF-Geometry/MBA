@@ -24,7 +24,7 @@ SET(DEPLIBS
 
 # Make the mba library
 
-FILE(GLOB mba_SRCS src/*.C src/*.cpp)
+FILE(GLOB_RECURSE mba_SRCS src/*.C src/*.cpp include/*.h)
 ADD_LIBRARY(mba ${mba_SRCS})
 
 

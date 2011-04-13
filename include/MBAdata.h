@@ -50,7 +50,7 @@ class MBAdata {
     std::vector<double> Z_;
 
   /// Read scattered data from file
-    void readScatteredData(char filename[]);
+    void readScatteredData(const char filename[]);
 
   void buildOffset();
   void buildBaseSurface();
