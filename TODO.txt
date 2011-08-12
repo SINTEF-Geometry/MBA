@@ -1,1 +1,4 @@
 - Include Data/rygg1.dat (and Data/scat.dat?) in the Doxygen documentation
+- Update Doxygen documentation to remove references to MBApar, MBAadaptive
+  and MBAadaptivePar. @jbt, 20110812
+
