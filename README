@@ -1,0 +1,20 @@
+MBA is rather a single algorithm than a library. It is developed for
+making surfaces from scattered data points. The algorithm works at
+different levels, and can be used both for small and large point
+sets. Compared to similar methods it is extremely fast. The code is
+implemented in C++.
+
+This software was written by the Geometry Group at SINTEF ICT,
+Department of Applied Mathematics.
+
+Requirements:
+* CMake
+  www.cmake.org
+
+For information on installation, see the INSTALL file.
+
+You can generate Doxygen information by typing 'doxygen' in the base
+directory.
+
+Good luck!
+

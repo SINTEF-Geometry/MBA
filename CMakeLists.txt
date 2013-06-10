@@ -57,7 +57,7 @@ ADD_CUSTOM_COMMAND(
   POST_BUILD
   COMMAND ${CMAKE_COMMAND}
   ARGS -E copy_directory ${mba_SOURCE_DIR}/Data 
-  ${mba_BINARY_DIR}/data
+  ${mba_BINARY_DIR}/Data
   )
 
 
@@ -88,6 +88,6 @@ ENDIF(WIN32)
 
 
 # CPack stuff
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "MBA-1.2.0")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "MBA-1.3.0")
 SET(CPACK_SOURCE_IGNORE_FILES "/CVS/;/\\.svn/;\\.swp$;\\.#;/#;.*~")
 INCLUDE(CPack)
