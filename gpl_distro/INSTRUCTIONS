@@ -1,8 +1,0 @@
-To make the MBA 1.1 GPL distribution, run the script 'prepare_distro'.
-
-The distribution will be created in a catalog called 'mba-1,1'.
-
-It will also be tarred and zipped into the file mba-1.1.tgz.
-
-The 'extras' catalog only contains the information necessary for the
-'prepare_distro' script to make the GPL distribution.
