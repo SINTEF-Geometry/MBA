@@ -2,7 +2,7 @@
 
 # removing result file structure
 EXTRA_CATALOG=extras
-RESULT_CATALOG=mba-1.1
+RESULT_CATALOG=mba-1.2
 rm -r $RESULT_CATALOG
 
 # reporting activity to user
@@ -20,10 +20,15 @@ mkdir $RESULT_CATALOG/doc
 mkdir $RESULT_CATALOG/doc/images
 
 # copying root-level files
-cp $EXTRA_CATALOG/COPYING $RESULT_CATALOG
-cp $EXTRA_CATALOG/makefile_template $RESULT_CATALOG/Makefile
-cp $EXTRA_CATALOG/README $RESULT_CATALOG
-cp $EXTRA_CATALOG/local_settings $RESULT_CATALOG
+cp COPYING $RESULT_CATALOG
+cp ../CMakeLists.txt $RESULT_CATALOG
+cp ChangeLog $RESULT_CATALOG
+cp README $RESULT_CATALOG
+cp INSTALL $RESULT_CATALOG
+#cp $EXTRA_CATALOG/makefile_template $RESULT_CATALOG/Makefile
+#cp $EXTRA_CATALOG/makefile_template $RESULT_CATALOG/Makefile
+#cp $EXTRA_CATALOG/README $RESULT_CATALOG
+#cp $EXTRA_CATALOG/local_settings $RESULT_CATALOG
 cp ../Data/rygg1.dat $RESULT_CATALOG/Data
 cp ../Doxyfile $RESULT_CATALOG
 cp ../doc/images/spockAndTerrain.jpg $RESULT_CATALOG/doc/images
@@ -38,7 +43,8 @@ do
   then
     # do not modify this file
     # first write license information
-    cat extras/license_header > $RESULT_CATALOG/include/$n
+#    cat extras/license_header > $RESULT_CATALOG/include/$n
+    cat license_header > $RESULT_CATALOG/include/$n
     cat $n >> $RESULT_CATALOG/include/$n
   else
     if test `grep $FILENAME $EXTRA_CATALOG/omit_files`
@@ -47,7 +53,8 @@ do
       echo Omitting $FILENAME
     else
       # first write license information
-      cat extras/license_header > $RESULT_CATALOG/include/$n
+#      cat extras/license_header > $RESULT_CATALOG/include/$n
+      cat license_header > $RESULT_CATALOG/include/$n
       # remove all information before include guards and add result to 
       # file
       sed -n -e'/#ifndef/,$p' $n >> $RESULT_CATALOG/include/$n
@@ -70,7 +77,8 @@ do
     # this file should be omitted from GPL distribution
     echo Omitting $FILENAME
   else 
-    cat extras/license_header > $RESULT_CATALOG/src/$n
+#    cat extras/license_header > $RESULT_CATALOG/src/$n
+    cat license_header > $RESULT_CATALOG/src/$n
     # remove comments from this file
     $EXTRA_CATALOG/removecomments < $n > xcmklp_temp
     cat xcmklp_temp >> $RESULT_CATALOG/src/$n
@@ -90,7 +98,8 @@ do
     # this file should be omitted from GPL distribution
     echo Omitting $FILENAME
   else 
-    cat extras/license_header > $RESULT_CATALOG/app/$n
+#    cat extras/license_header > $RESULT_CATALOG/app/$n
+    cat license_header > $RESULT_CATALOG/app/$n
     # remove comments from this file
     cat $n > xcmklp_temp
     cat xcmklp_temp >> $RESULT_CATALOG/app/$n
