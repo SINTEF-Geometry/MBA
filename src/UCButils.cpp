@@ -564,7 +564,7 @@ void UCBspl::readSplineSurface(const char filename[], UCBspl::SplineSurface& sur
   cout << "Size of surface = " << noX << " X " << noY << endl;
 #endif
   
-  boost::shared_ptr<GenMatrixType> PHI(new GenMatrix<UCBspl_real>(noX, noY));
+  std::shared_ptr<GenMatrixType> PHI(new GenMatrix<UCBspl_real>(noX, noY));
   for (int i = 0; i < noX; i++) {
     for (int j = 0; j < noY; j++) {
       is >> (*PHI)(i-1,j-1);
@@ -620,7 +620,7 @@ void UCBspl::readSplineSurfaceBin(const char filename[], UCBspl::SplineSurface& 
   cout << "Size of surface = " << noX << " X " << noY << endl;
 #endif
   
-  boost::shared_ptr<GenMatrixType> PHI(new GenMatrix<UCBspl_real>(noX, noY));
+  std::shared_ptr<GenMatrixType> PHI(new GenMatrix<UCBspl_real>(noX, noY));
   UCBspl_real coef;
   for (int i = 0; i < noX; i++) {
     for (int j = 0; j < noY; j++) {

@@ -3,30 +3,19 @@ PROJECT(mba)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 
-# Find modules
-
-FIND_PACKAGE(Boost REQUIRED)
-
-
 # Include directories
 
 INCLUDE_DIRECTORIES(
   ${mba_SOURCE_DIR}/include
-  ${Boost_INCLUDE_DIRS}
   )
-
-
-# Linked in libraries
-
-SET(DEPLIBS
-  )
-
 
 # Make the mba library
 
 FILE(GLOB_RECURSE mba_SRCS src/*.C src/*.cpp include/*.h)
 ADD_LIBRARY(mba ${mba_SRCS})
 
+set_target_properties(mba PROPERTIES
+  CXX_STANDARD 11)
 
 # Set various compiler flags
 
@@ -48,7 +37,7 @@ FILE(GLOB mba_APPS app/*.C app/*.cpp)
 FOREACH(app ${mba_APPS})
   GET_FILENAME_COMPONENT(appname ${app} NAME_WE)
   ADD_EXECUTABLE(${appname} ${app})
-  TARGET_LINK_LIBRARIES(${appname} mba ${DEPLIBS})
+  TARGET_LINK_LIBRARIES(${appname} mba)  
 ENDFOREACH(app)
 
 # Copy data

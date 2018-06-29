@@ -59,7 +59,7 @@ using namespace UCBspl;
 
 // NOTE: namespace UCBspl:
 
-SplineSurface::SplineSurface(boost::shared_ptr<GenMatrixType> PHI,
+SplineSurface::SplineSurface(std::shared_ptr<GenMatrixType> PHI,
                              double umin, double vmin, 
                              double umax, double vmax) {
   PHI_  = PHI;
@@ -78,7 +78,7 @@ SplineSurface::SplineSurface(const SplineSurface& surf) {
   vmax_ = surf.vmax_;
 }
 
-void SplineSurface::init(boost::shared_ptr<GenMatrixType> PHI,
+void SplineSurface::init(std::shared_ptr<GenMatrixType> PHI,
                          double umin, double vmin, 
                          double umax, double vmax) {
   PHI_  = PHI;
@@ -323,7 +323,7 @@ void SplineSurface::secondDerivatives(double u, double v, double& ddx, double& d
     }
   }
   
-  // Har ikke sett på hvordan det blir med skaleringa her.
+  // Har ikke sett pï¿½ hvordan det blir med skaleringa her.
   
   // find cross product and normalize
   // (-df/du, -df/dv, 1)

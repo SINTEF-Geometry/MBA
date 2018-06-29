@@ -42,7 +42,7 @@
 
 #include <MBAtypedef.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 //===========================================================================
 /** \brief Holds the scattered data
@@ -54,7 +54,7 @@
  * member functions.
  * See further documentation in MBA and MBAadaptive
  * 
- * \author Øyvind Hjelle <Oyvind.Hjelle@math.sintef.no>
+ * \author ï¿½yvind Hjelle <Oyvind.Hjelle@math.sintef.no>
  * \see MBA, MBAadaptive, MBAdataPar
  */
 //===========================================================================
@@ -69,9 +69,9 @@ class MBAdata {
 
   MBAbaseType  baseType_;  
   double offset_;
-  boost::shared_ptr<dVec> U_;
-  boost::shared_ptr<dVec> V_;
-  boost::shared_ptr<dVec> Zorig_;
+  std::shared_ptr<dVec> U_;
+  std::shared_ptr<dVec> V_;
+  std::shared_ptr<dVec> Zorig_;
     std::vector<double> Z_;
 
   /// Read scattered data from file
@@ -114,7 +114,7 @@ public:
 	~MBAdata() {}
 
   /// Initialize with scattered data
-  void init(boost::shared_ptr<dVec> U, boost::shared_ptr<dVec> V, boost::shared_ptr<dVec> Z);
+  void init(std::shared_ptr<dVec> U, std::shared_ptr<dVec> V, std::shared_ptr<dVec> Z);
   
   /// min u-value of the actual data domain
   const double& umin() const {return umin_;}
@@ -129,9 +129,9 @@ public:
   const double& rangeVInv() const {return vrange_inv_;}
 
   // Access to scattered data
-  const boost::shared_ptr<dVec>& U() const {return U_;};
-  const boost::shared_ptr<dVec>& V() const {return V_;};
-  const boost::shared_ptr<dVec>& Zorig() const {return Zorig_;};
+  const std::shared_ptr<dVec>& U() const {return U_;};
+  const std::shared_ptr<dVec>& V() const {return V_;};
+  const std::shared_ptr<dVec>& Zorig() const {return Zorig_;};
   const std::vector<double>& Z() const {return Z_;}; // also non-const private members
   double U(int i) const {return (*U_)[i];};
   double V(int i) const {return (*V_)[i];};

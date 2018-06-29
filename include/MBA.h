@@ -46,7 +46,7 @@
 #include <MBAdata.h>
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <UCBsplineSurface.h>
 //===========================================================================
@@ -83,7 +83,7 @@ class MBA {
   
   MBAdata data_;
   int m_,n_; // the lattice is from -1,0,...,m_+1  -1,0,...,n_+1
-  boost::shared_ptr<GenMatrixType> PHI_;
+  std::shared_ptr<GenMatrixType> PHI_;
 
   static const std::vector<UCBspl_real> smoothing_filter_;
 
@@ -108,7 +108,7 @@ public:
 
   /** Constructor with (standard) shared pointers to scattered data
     */
-  MBA(boost::shared_ptr<dVec> U, boost::shared_ptr<dVec> V, boost::shared_ptr<dVec> Z)
+  MBA(std::shared_ptr<dVec> U, std::shared_ptr<dVec> V, std::shared_ptr<dVec> Z)
      {data_.init(U, V, Z);}
     
  ~MBA(){}
@@ -116,7 +116,7 @@ public:
   /** Initialization that takes reference to arrays of scattered data.
     * Note: see documenation of corresponding constructor above.
     */
-  void init(boost::shared_ptr<dVec> U, boost::shared_ptr<dVec> V, boost::shared_ptr<dVec> Z)
+  void init(std::shared_ptr<dVec> U, std::shared_ptr<dVec> V, std::shared_ptr<dVec> Z)
      {data_.init(U, V, Z);}
 
   /** Initialization of surface using data retrieved by getSplineSurface()
@@ -213,7 +213,7 @@ public:
 
   /** Get the coefficient grid of the tensor product spline surface.
     */
-  boost::shared_ptr<GenMatrixType> PHI() const {return PHI_;}
+  std::shared_ptr<GenMatrixType> PHI() const {return PHI_;}
 
   // (Temporary) utilities
   void checkSparsity() const;

@@ -54,9 +54,9 @@ int main() {
   // etc.
 
   typedef std::vector<double> dVec;
-  boost::shared_ptr<dVec> x_arr(new std::vector<double>);
-  boost::shared_ptr<dVec> y_arr(new std::vector<double>);
-  boost::shared_ptr<dVec> z_arr(new std::vector<double>);
+  std::shared_ptr<dVec> x_arr = std::make_shared<std::vector<double> >();
+  std::shared_ptr<dVec> y_arr = std::make_shared<std::vector<double> >();
+  std::shared_ptr<dVec> z_arr = std::make_shared<std::vector<double> >();
   UCBspl::readScatteredData("Data/rygg1.dat", *x_arr, *y_arr, *z_arr);
 
   MBA mba(x_arr, y_arr, z_arr);
